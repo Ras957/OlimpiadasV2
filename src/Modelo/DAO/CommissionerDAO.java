@@ -16,8 +16,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -142,7 +140,7 @@ public class CommissionerDAO extends Commissioner{
                 } catch (DNIException ex) {
                     String dni = rs.getString("dni");
                     throw new DNIException("El DNI "+dni+
-                            " no es válido");
+                            " no es válido", ex);
                 }
             }
         } catch (SQLException ex) {
@@ -167,7 +165,7 @@ public class CommissionerDAO extends Commissioner{
                 } catch (DNIException ex) {
                     String dni = rs.getString("dni");
                     throw new DNIException("El DNI "+dni+
-                            " no es válido");
+                            " no es válido", ex);
                 }
             }else{
                 throw new DAOException("No se ha encontrado ese registro");
@@ -181,6 +179,7 @@ public class CommissionerDAO extends Commissioner{
     }
     
 }
+
 
 
 
