@@ -32,8 +32,8 @@ public class HeadquarterDAO extends Headquarter {
 
     public static Conexion con;
 
-    public HeadquarterDAO(Headquarter dao) throws DAOException {
-        super(dao.getName(), dao.getBudget());
+    public HeadquarterDAO(Headquarter headquarter) throws DAOException {
+        super(headquarter.getName(), headquarter.getBudget());
         con = Conexion.getInstance();
     }
 
@@ -187,6 +187,8 @@ public class HeadquarterDAO extends Headquarter {
         return n;
     }
 }
+
+
 
 
 

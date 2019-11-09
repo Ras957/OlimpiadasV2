@@ -17,9 +17,7 @@ public class SportCenter extends SportComplex{
     public SportCenter(SportComplex sc, String sport,
             String information) {
         super(sc.getLocation(), sc.getBoss(), sc.getHeadquarter());
-        if (sc.getId() != null) {
-            this.id = sc.getId();
-        }
+        this.id = sc.getId();
         this.sport= sport;
         this.information = information;
     }
@@ -65,6 +63,7 @@ public class SportCenter extends SportComplex{
                 " Información: "+this.information;
     }
 }
+
 
 
 

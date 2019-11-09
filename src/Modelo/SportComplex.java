@@ -32,6 +32,7 @@ public class SportComplex {
     public SportComplex() {
         this.location = "";
         this.boss = "";
+        this.headquarter = null;
     }
 
     /**
@@ -103,6 +104,7 @@ public class SportComplex {
     }
     
 }
+
 
 
 

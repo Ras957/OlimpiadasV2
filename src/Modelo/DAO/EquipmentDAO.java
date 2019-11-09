@@ -5,80 +5,80 @@
  */
 package Modelo.DAO;
 
-import Modelo.SportCenter;
-import Modelo.SportComplex;
+import Modelo.Equipment;
 import Modelo.auxiliary.Closer;
 import Modelo.auxiliary.Conexion;
 import Modelo.auxiliary.DAOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
-public class SportCenterDAO extends SportCenter{
+public class EquipmentDAO extends Equipment{
     
-    public static final String INSERT = "INSERT INTO sportcenter(id_sportcomplex,sport,information) VALUES(?,?,?)";
-    public static final String UPDATE = "UPDATE sportcenter SET id_sportcomplex=? sport=?, information=? WHERE id_sportcomplex=?";
-    public static final String DELETE = "DELETE FROM sportcenter WHERE id_sportcomplex=?";
-    public static final String GETALL = "SELECT * FROM sportcenter";
-    public static final String GETONE = "SELECT * FROM sportcenter WHERE id_sportcomplex=?";
+    public static final String INSERT = "INSERT INTO equipment(name) VALUES(?)";
+    public static final String UPDATE = "UPDATE equipment SET name=? WHERE id=?";
+    public static final String DELETE = "DELETE FROM equipment WHERE id=?";
+    public static final String GETALL = "SELECT * FROM equipment";
+    public static final String GETONE = "SELECT * FROM equipment WHERE id=?";
     
     public static Conexion con;
-    
-    public SportCenterDAO(SportCenter sc) throws DAOException {
-        super(new SportComplex(sc.getLocation(), sc.getBoss(),
-                sc.getHeadquarter()),sc.getSport(),sc.getInformation());
-        this.id = sc.getId();
+
+    public EquipmentDAO(Equipment equip) throws DAOException {
+        super(equip.getName());
         con = Conexion.getInstance();
     }
 
-    public SportCenterDAO(SportComplex sc, String sport, 
-            String information) throws DAOException {
-        super(sc, sport, information);
-        this.id = sc.getId();
-        con = Conexion.getInstance();
-    }
-
-    public SportCenterDAO() throws DAOException {
+    public EquipmentDAO(String name) throws DAOException {
+        super(name);
         con = Conexion.getInstance();
     }
     
-    public boolean insertSportCenter() throws DAOException {
+    public EquipmentDAO() throws DAOException {
+         con = Conexion.getInstance();
+    }
+    
+    public boolean insertEquipment() throws DAOException {
         boolean yes = false;
         PreparedStatement stat = null;
+        ResultSet rs = null;
         try{
-            stat = con.getMiConexion().prepareStatement(INSERT);
-            stat.setInt(1, this.getId());
-            stat.setString(2, this.getSport());
-            stat.setString(3, this.getInformation());
+            stat = con.getMiConexion().prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
+            stat.setString(1, this.getName());
             if (stat.executeUpdate() == 0){
                 throw new DAOException("Puede que no se haya guardado");
+            }
+            rs = stat.getGeneratedKeys();
+            if (rs.next()) {
+                this.setId(rs.getInt(1));
+                yes=true;
             }else{
-                yes = true;
+                throw new DAOException("No puedo asignar ID a este Equipamiento");
             }
         }catch(SQLException ex){
             throw new DAOException("Error en SQL", ex);
         }finally{
-            Closer.close(stat);
+            Closer.close(stat, rs);
         }
         return yes;
     }
     
-    public boolean modifySportCenter(Integer id) throws DAOException {
+    public boolean modifyEquipment() throws DAOException {
         boolean yes = false;
         PreparedStatement stat = null;
         try{
             stat = con.getMiConexion().prepareStatement(UPDATE);
-            stat.setInt(1, this.getId());
-            stat.setString(2, this.getSport());
-            stat.setString(4, this.getInformation());
-            stat.setInt(3, id);
+            stat.setString(1, this.getName());
+            stat.setInt(2, this.getId());
             if (stat.executeUpdate() == 0){
                 throw new DAOException("Puede que no se haya guardado");
             }else{
@@ -92,7 +92,7 @@ public class SportCenterDAO extends SportCenter{
         return yes;
     }
     
-    public boolean deleteSportCenter() throws DAOException {
+    public boolean deleteEquipment() throws DAOException {
         boolean yes = false;
         PreparedStatement stat = null;
         try{
@@ -111,48 +111,47 @@ public class SportCenterDAO extends SportCenter{
         return yes;
     }
     
-    private SportCenter convert(ResultSet rs) throws DAOException{
-        SportCenter sportCenter = null;
+    
+    private Equipment convert(ResultSet rs) throws DAOException{
+        Equipment equip = null;
         try {
-            SportComplex sportComplex = 
-                    new SportComplexDAO().getComplex(rs.getInt("id_sportcomplex"));
-            String sport = rs.getString("sport");
-            String location = rs.getString("information");
-            sportCenter = new SportCenter(sportComplex, sport, location);
+            String name = rs.getString("name");
+            equip = new Equipment(name);
+            equip.setId(rs.getInt("id"));
         } catch (SQLException ex) {
             throw new DAOException("Error en SQL", ex);
         }
-        return sportCenter;
+        return equip;
     }
 
-    public List<SportCenter> getAllSportCenter() throws DAOException {
+    public List<Equipment> getAllEquipment() throws DAOException {
         PreparedStatement stat = null;
         ResultSet rs = null;
-        List<SportCenter> sportCenters = new ArrayList<>();
+        List<Equipment> equipements = new ArrayList<>();
         try{
             stat = con.getMiConexion().prepareStatement(GETALL);
             rs = stat.executeQuery();
             while (rs.next()){
-                sportCenters.add(convert(rs));
+                equipements.add(convert(rs));
             }
         } catch (SQLException ex) {
             throw new DAOException("Error en SQL", ex);
         }finally{
             Closer.close(stat, rs);
         }
-        return sportCenters;
+        return equipements;
     }
 
-    public SportCenter getSportCenter(Integer id) throws DAOException {
+    public Equipment getEquipment(Integer id) throws DAOException {
         PreparedStatement stat = null;
         ResultSet rs = null;
-        SportCenter sportCenter = null;
+        Equipment equip = null;
         try{
             stat = con.getMiConexion().prepareStatement(GETONE);
             stat.setInt(1, id);
             rs = stat.executeQuery();
             if(rs.next()){
-                sportCenter = convert(rs);
+                equip = convert(rs);
             }else{
                 throw new DAOException("No se ha encontrado ese registro");
             }
@@ -161,19 +160,9 @@ public class SportCenterDAO extends SportCenter{
         }finally{
             Closer.close(stat, rs);
         }
-        return sportCenter;
+        return equip;
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

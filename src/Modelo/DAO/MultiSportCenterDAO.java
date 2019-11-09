@@ -37,12 +37,14 @@ public class MultiSportCenterDAO extends MultiSportCenter{
     public MultiSportCenterDAO(MultiSportCenter msc) throws DAOException {
         super( new SportComplex(msc.getLocation(), msc.getBoss()
                 ,msc.getHeadquarter()), msc.getInformation());
+        this.id= msc.getId();
         con = Conexion.getInstance();
     }
 
     public MultiSportCenterDAO(SportComplex sc, String information) 
             throws DAOException {
         super(sc, information);
+        this.id = sc.getId();
         con = Conexion.getInstance();
     }
 
@@ -162,6 +164,10 @@ public class MultiSportCenterDAO extends MultiSportCenter{
         return multiSportCenter;
     }
 }
+
+
+
+
 
 
 
