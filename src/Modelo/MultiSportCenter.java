@@ -1,9 +1,8 @@
 package Modelo;
 
-import java.util.List;
-
 /**
- *
+ * Clase MultiSportCenter que hereda de SportComplex e
+ * instancia objetos MultiSportCenter
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
@@ -52,6 +51,8 @@ public class MultiSportCenter extends SportComplex{
         return "ID: "+this.id+" Información: "+this.information;
     }
 }
+
+
 
 
 

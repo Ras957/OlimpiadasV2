@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *  Clase MultiSportCenterDAO que hereda de MultiSportCenter y sirve para 
+ * comunicarse con la base de datos
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
@@ -28,6 +29,7 @@ public class MultiSportCenterDAO extends MultiSportCenter{
     public static final String DELETE = "DELETE FROM multisportcenter WHERE id_sportcomplex=?";
     public static final String GETALL = "SELECT * FROM multisportcenter";
     public static final String GETONE = "SELECT * FROM multisportcenter WHERE id_sportcomplex=?";
+    public static final String GET_N_AREAS = "SELECT count(id) AS numAreas FROM area WHERE id_multisportcenter=?";
     
     public static Conexion con;
     
@@ -35,6 +37,7 @@ public class MultiSportCenterDAO extends MultiSportCenter{
         super( new SportComplex(msc.getLocation(), msc.getBoss()
                 ,msc.getHeadquarter()), msc.getInformation());
         this.id= msc.getId();
+        this.nAreas = msc.getnAreas();
         con = Conexion.getInstance();
     }
 
@@ -116,6 +119,7 @@ public class MultiSportCenterDAO extends MultiSportCenter{
                     new SportComplexDAO().getComplex(rs.getInt("id_sportcomplex"));
             String information = rs.getString("information");
             msc = new MultiSportCenter(sportComplex, information);
+            msc.setnAreas(countAreas(sportComplex.getId()));
         } catch (SQLException ex) {
             throw new DAOException("Error en SQL", ex);
         }
@@ -160,7 +164,33 @@ public class MultiSportCenterDAO extends MultiSportCenter{
         }
         return multiSportCenter;
     }
+    
+    public int countAreas(Integer id) throws DAOException {
+        int n = 0;
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        try {
+            stat = con.getMiConexion().prepareStatement(GET_N_AREAS);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                n = rs.getInt("numAreas");
+            } else {
+                throw new DAOException("No se ha encontrado ese registro");
+            }
+        } catch (SQLException ex) {
+            throw new DAOException("Error en SQL", ex);
+        } finally {
+             Closer.close(stat, rs);
+        }
+        return n;
+    }
 }
+
+
+
+
+
 
 
 

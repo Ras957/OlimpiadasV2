@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *  Clase SportCenterDAO que hereda de SportCenter y sirve para 
+ * comunicarse con la base de datos
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
@@ -164,6 +165,7 @@ public class SportCenterDAO extends SportCenter{
         return sportCenter;
     }
 }
+
 
 
 

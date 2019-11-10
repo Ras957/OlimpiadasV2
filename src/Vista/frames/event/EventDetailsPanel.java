@@ -19,7 +19,6 @@ import Vista.frames.sportcenter.SportComplexComboView;
 import java.sql.Date;
 import java.text.ParseException;
 
-
 /**
  *
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
@@ -78,7 +77,7 @@ public class EventDetailsPanel extends javax.swing.JPanel {
         TextName.setEditable(edit);
         ComboBoxSportComplex.setEnabled(edit);
         FormattedTextDate.setEditable(edit);
-        ComboBoxArea.setEnabled(edit); 
+        ComboBoxArea.setEnabled(edit);
         ComboBoxEquipment.setEnabled(edit);
         ComboBoxCommissioner.setEnabled(edit);
         ComboBoxRol.setEnabled(edit);
@@ -139,7 +138,7 @@ public class EventDetailsPanel extends javax.swing.JPanel {
             SelectItemComboBox();
         } else {
             TextName.setText("");
-            FormattedTextDate.setValue("");
+            FormattedTextDate.setValue(null);
             try {
                 comboArea.update(ComboBoxSportComplex.getItemAt(0).getId());
                 ComboBoxArea.setModel(comboArea);
@@ -162,12 +161,12 @@ public class EventDetailsPanel extends javax.swing.JPanel {
         }
         if (ComboBoxArea.isEnabled()) {
             for (int i = 0; i < ComboBoxArea.getItemCount() && !encontrado2; i++) {
-            if (ComboBoxArea.getItemAt(i).getId()
-                    == event.getArea().getId()) {
-                ComboBoxArea.setSelectedIndex(i);
-                encontrado2 = true;
+                if (ComboBoxArea.getItemAt(i).getId()
+                        == event.getArea().getId()) {
+                    ComboBoxArea.setSelectedIndex(i);
+                    encontrado2 = true;
+                }
             }
-        }
         }
     }
 
@@ -179,9 +178,14 @@ public class EventDetailsPanel extends javax.swing.JPanel {
         SportComplexComboView sccv
                 = (SportComplexComboView) ComboBoxSportComplex.getSelectedItem();
         event.setComplex((SportComplex) sccv);
-        event.setDate((Date) FormattedTextDate.getValue());
+        try {
+            FormattedTextDate.commitEdit();
+            event.setDate((java.util.Date)FormattedTextDate.getValue());
+        } catch (ParseException ex) {
+            ex.getMessage();
+        }
         AreaComboView acv = (AreaComboView) ComboBoxArea.getSelectedItem();
-        event.setArea((Area)acv);
+        event.setArea((Area) acv);
         EquipmentComboView ecv
                 = (EquipmentComboView) ComboBoxEquipment.getSelectedItem();
         event.getEquip().add(ecv);
@@ -234,7 +238,7 @@ public class EventDetailsPanel extends javax.swing.JPanel {
 
         Commissioners.setText("Comisarios:");
 
-        FormattedTextDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        FormattedTextDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MM-yyyy"))));
 
         ComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OBSERVADOR", "JUEZ" }));
 

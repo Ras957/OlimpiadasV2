@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
 /**
+ * Clase SportCenter que hereda de SportComplex e instancia objetos SportCenter
  *
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
-public class SportCenter extends SportComplex{
+public class SportCenter extends SportComplex {
+
     protected String sport;
     protected String information;
 
@@ -18,14 +15,14 @@ public class SportCenter extends SportComplex{
             String information) {
         super(sc.getLocation(), sc.getBoss(), sc.getHeadquarter());
         this.id = sc.getId();
-        this.sport= sport;
+        this.sport = sport;
         this.information = information;
     }
 
     public SportCenter() {
         super("", "", null);
         this.id = null;
-        this.sport= "";
+        this.sport = "";
         this.information = "";
     }
 
@@ -56,22 +53,11 @@ public class SportCenter extends SportComplex{
     public void setInformation(String information) {
         this.information = information;
     }
-    
+
     @Override
-    public String toString(){
-        return "ID: "+this.id+" Deporte: "+this.sport+
-                " Información: "+this.information;
+    public String toString() {
+        return "ID: " + this.id + " Deporte: " + this.sport
+                + " Información: " + this.information;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 

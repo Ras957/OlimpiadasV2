@@ -18,7 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *  Clase SportComplexDAO que hereda de SportComplex y sirve para 
+ * comunicarse con la base de datos
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
@@ -176,6 +177,7 @@ public class SportComplexDAO extends SportComplex {
     }
 
 }
+
 
 
 

@@ -41,6 +41,9 @@ public class MultiSportCenterTablaModel extends AbstractTableModel{
             case 1:
                 n = "Informacion";
                 break;
+            case 2:
+                n = "Número de Areas";
+                break;
             default:
                 n = "[no]";
         }
@@ -54,7 +57,7 @@ public class MultiSportCenterTablaModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -64,11 +67,14 @@ public class MultiSportCenterTablaModel extends AbstractTableModel{
         switch (columnIndex){
             case 0: o = msc.getId(); break;
             case 1: o = msc.getInformation(); break;
+            case 2: o = msc.getnAreas(); break;
             default: o = "";
         }
         return o;
     }
 }
+
+
 
 
 

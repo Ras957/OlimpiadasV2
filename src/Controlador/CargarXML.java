@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import java.io.File;
@@ -12,12 +7,19 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 /**
- *
+ * Clase para leer nuestro archivo XML con la configuración de la Conexión
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
 public class CargarXML {
     
+    /**
+     * Crea un objeto Configuracion a partir de un XML
+     * @param f
+     * @return objeto Configuración
+     * @throws JAXBException
+     * @throws SQLException
+     */
     public static Configuracion unmarshal(File f) throws JAXBException, SQLException{
         Configuracion conf = new Configuracion();
         JAXBContext context = JAXBContext.newInstance(Configuracion.class);
@@ -27,6 +29,7 @@ public class CargarXML {
     }
     
 }
+
 
 
 

@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
 /**
- *
+ * Clase Equipment que instancia objetos Equipment
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfrancisidlosrios.es>
  */
@@ -71,16 +66,15 @@ public class Equipment {
         this.maintenance = maintenance;
     }
     
-    /*@Override
+    @Override
     public String toString(){
         return "ID: "+this.id+" Nombre: "+this.name;
-    }*/
-    @Override
-    public String toString() {
-        return this.name+" ("+this.id+")";
     }
     
+    
 }
+
+
 
 
 

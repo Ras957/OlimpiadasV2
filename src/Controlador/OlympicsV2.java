@@ -5,34 +5,10 @@
  */
 package Controlador;
 
-import Modelo.Area;
-import Modelo.Commissioner;
-import Modelo.DAO.AreaDAO;
-import Modelo.DAO.CommissionerDAO;
-import Modelo.DAO.EquipmentDAO;
-import Modelo.DAO.EventDAO;
-import Modelo.DAO.HeadquarterDAO;
-import Modelo.DAO.MultiSportCenterDAO;
-import Modelo.DAO.SportCenterDAO;
-import Modelo.DAO.SportComplexDAO;
-import Modelo.Equipment;
-import Modelo.Event;
-import Modelo.Headquarter;
-import Modelo.MultiSportCenter;
-import Modelo.SportCenter;
-import Modelo.SportComplex;
 import Modelo.auxiliary.Conexion;
 import Modelo.auxiliary.DAOException;
 import Modelo.auxiliary.DNIException;
 import Vista.MainMenu;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -63,4 +39,5 @@ public class OlympicsV2 {
     }
 
 }
+
 

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *  Clase AreaDAO que hereda de Area y sirve para comunicarse con la base de datos
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
@@ -195,6 +195,7 @@ public class AreaDAO extends Area{
         return areas;
     }
 }
+
 
 
 

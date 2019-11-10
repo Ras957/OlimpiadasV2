@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *  Clase EquipmentDAO que hereda de Equipment y sirve para 
+ * comunicarse con la base de datos
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
@@ -162,6 +163,7 @@ public class EquipmentDAO extends Equipment{
         return equip;
     }
 }
+
 
 
 

@@ -68,7 +68,12 @@ public class HeadquarterTableModel extends AbstractTableModel{
         }
         return o;
     }
+    
 }
+
+
+
+
 
 
 

@@ -18,7 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *  Clase CommissionerDAO que hereda de Commissioner y sirve para 
+ * comunicarse con la base de datos
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
@@ -180,6 +181,7 @@ public class CommissionerDAO extends Commissioner{
     }
     
 }
+
 
 
 

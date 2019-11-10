@@ -59,11 +59,11 @@ public class ListSportComplexFrame extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JToolBar.Separator();
         BSave = new javax.swing.JButton();
         BCancel = new javax.swing.JButton();
+        Detalles = new javax.swing.JPanel();
+        Details = new Vista.frames.sportcomplex.SportComplexDetailsPanel();
         Registros = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        Detalles = new javax.swing.JPanel();
-        Details = new Vista.frames.sportcomplex.SportComplexDetailsPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro Complejos");
@@ -148,7 +148,16 @@ public class ListSportComplexFrame extends javax.swing.JFrame {
         });
         jToolBar1.add(BCancel);
 
+        getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
+
+        Detalles.setMinimumSize(new java.awt.Dimension(0, 0));
+        Detalles.setLayout(new java.awt.BorderLayout());
+        Detalles.add(Details, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(Detalles, java.awt.BorderLayout.LINE_END);
+
         Registros.setText("Numero de registros");
+        getContentPane().add(Registros, java.awt.BorderLayout.PAGE_END);
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,84 +172,21 @@ public class ListSportComplexFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        Detalles.setLayout(new java.awt.BorderLayout());
-        Detalles.add(Details, java.awt.BorderLayout.CENTER);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 951, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Detalles, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Registros)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Detalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Registros))
-        );
+        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private SportComplex getSelectedSportComplex() throws DAOException {
-        int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
-        return new SportComplexDAO().getComplex(id);
-    }
-    
-    private void BAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAddActionPerformed
-        tabla.clearSelection();
+    private void BCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelActionPerformed
         Details.setSportComplex(null);
+        Details.setEdit(false);
         Details.loadData();
-        Details.setEdit(true);
-        activateButtonsSave(true);
-    }//GEN-LAST:event_BAddActionPerformed
-
-    private void BEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BEditActionPerformed
-        try {
-            SportComplex sportComplex = getSelectedSportComplex();
-            Details.setSportComplex(sportComplex);
-            Details.setEnabled(true);
-            Details.setEdit(true);
-            Details.loadData();
-            activateButtonsSave(true);
-        } catch (DAOException ex) {
-            ex.getMessage();
-        }
-    }//GEN-LAST:event_BEditActionPerformed
-
-    private void BDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BDeleteActionPerformed
-        if (JOptionPane.showConfirmDialog(rootPane, "¿Seguro que quieres borrar "
-            + "este Complejo?", "Borrar Complejo", JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-        try {
-            SportComplex sportComplex = getSelectedSportComplex();
-            new SportComplexDAO(sportComplex).deleteComplex();
-            getData();
-        } catch (DAOException ex) {
-            ex.getMessage();
-        }
-        }
-    }//GEN-LAST:event_BDeleteActionPerformed
+        tabla.clearSelection();
+        activateButtonsSave(false);
+    }//GEN-LAST:event_BCancelActionPerformed
 
     private void BSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSaveActionPerformed
-try {
+        try {
             if (Details.checkData()) {
                 Details.saveData();
                 SportComplex sportComplex = Details.getSportComplex();
@@ -266,14 +212,46 @@ try {
         }
     }//GEN-LAST:event_BSaveActionPerformed
 
-    private void BCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelActionPerformed
-        Details.setSportComplex(null);
-        Details.setEdit(false);
-        Details.loadData();
+    private void BDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BDeleteActionPerformed
+        if (JOptionPane.showConfirmDialog(rootPane, "¿Seguro que quieres borrar "
+            + "este Complejo?", "Borrar Complejo", JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+        try {
+            SportComplex sportComplex = getSelectedSportComplex();
+            new SportComplexDAO(sportComplex).deleteComplex();
+            getData();
+        } catch (DAOException ex) {
+            ex.getMessage();
+        }
+        }
+    }//GEN-LAST:event_BDeleteActionPerformed
+
+    private void BEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BEditActionPerformed
+        try {
+            SportComplex sportComplex = getSelectedSportComplex();
+            Details.setSportComplex(sportComplex);
+            Details.setEnabled(true);
+            Details.setEdit(true);
+            Details.loadData();
+            activateButtonsSave(true);
+        } catch (DAOException ex) {
+            ex.getMessage();
+        }
+    }//GEN-LAST:event_BEditActionPerformed
+
+    private void BAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAddActionPerformed
         tabla.clearSelection();
-        activateButtonsSave(false);
-    }//GEN-LAST:event_BCancelActionPerformed
-   
+        Details.setSportComplex(null);
+        Details.loadData();
+        Details.setEdit(true);
+        activateButtonsSave(true);
+    }//GEN-LAST:event_BAddActionPerformed
+
+    private SportComplex getSelectedSportComplex() throws DAOException {
+        int id = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
+        return new SportComplexDAO().getComplex(id);
+    }
+       
     private void activateButtonsCRUD(boolean active) {
         BEdit.setEnabled(active);
         BDelete.setEnabled(active);

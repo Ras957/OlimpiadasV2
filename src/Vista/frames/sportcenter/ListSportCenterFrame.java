@@ -60,11 +60,11 @@ public class ListSportCenterFrame extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JToolBar.Separator();
         BSave = new javax.swing.JButton();
         BCancel = new javax.swing.JButton();
+        Detalles = new javax.swing.JPanel();
+        Registros = new javax.swing.JLabel();
+        Details = new Vista.frames.sportcenter.SportCenterDetailsPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        Detalles = new javax.swing.JPanel();
-        Details = new Vista.frames.sportcenter.SportCenterDetailsPanel();
-        Registros = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro Unideportivos");
@@ -149,6 +149,16 @@ public class ListSportCenterFrame extends javax.swing.JFrame {
         });
         jToolBar1.add(BCancel);
 
+        getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
+
+        Detalles.setLayout(new java.awt.BorderLayout());
+
+        Registros.setText("Numero de registros");
+        Detalles.add(Registros, java.awt.BorderLayout.PAGE_END);
+
+        getContentPane().add(Detalles, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(Details, java.awt.BorderLayout.LINE_END);
+
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -162,36 +172,7 @@ public class ListSportCenterFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        Detalles.setLayout(new java.awt.BorderLayout());
-        Detalles.add(Details, java.awt.BorderLayout.CENTER);
-
-        Registros.setText("Numero de registros");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 951, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Detalles, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Registros))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(Detalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Registros)
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

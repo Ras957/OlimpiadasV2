@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Modelo.auxiliary;
 
 /**
- * 
- * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba <afcarrasquilla@iesfranciscodelosrios.es>
+ * Clase para controlar las excepciones cuando se introduce un DNI erróneo
+ * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba 
+ * <afcarrasquilla@iesfranciscodelosrios.es>
  */
 public class DNIException extends Exception{
 

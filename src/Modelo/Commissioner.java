@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
 /**
- *
+ * Clase Commissioner que instancia objetos Commissioner
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfrancisidlosrios.es>
  */
@@ -124,17 +119,14 @@ public class Commissioner {
         return myLetter;
     }
     
-    /*@Override
+    @Override
     public String toString(){
         return "ID: "+this.id+" Nombre: "+this.name+" DNI "+this.dni;
-    }*/
-
-    @Override
-    public String toString() {
-        return this.name+" ("+this.id+")";
     }
     
 }
+
+
 
 
 

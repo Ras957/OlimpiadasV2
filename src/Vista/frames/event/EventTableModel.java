@@ -96,7 +96,11 @@ public class EventTableModel extends AbstractTableModel {
                 o = e.getDate();
                 break;
             case 4:
-                o = e.getArea();
+                String area="";
+                if (e.getArea()!= null) {
+                   area = e.getArea().getLocation()+"()"; 
+                }
+                o = area;
                 break;
             case 5:
                 String materiales ="";

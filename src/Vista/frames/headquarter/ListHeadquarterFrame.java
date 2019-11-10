@@ -229,16 +229,22 @@ public class ListHeadquarterFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BSaveActionPerformed
 
     private void BDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BDeleteActionPerformed
-        if (JOptionPane.showConfirmDialog(rootPane, "¿Seguro que quieres borrar "
-                + "esta sede?", "Borrar Sede", JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-            try {
-                Headquarter headquarter = getSelectedHeadquarter();
-                new HeadquarterDAO(headquarter).deleteHeadquarter();
-                getData();
-            } catch (DAOException ex) {
-                ex.getMessage();
+        try {
+            Headquarter headquarter = getSelectedHeadquarter();
+            if (headquarter.getNumComplexes() == 0) {
+                if (JOptionPane.showConfirmDialog(rootPane, "¿Seguro que quieres borrar "
+                        + "esta sede?", "Borrar Sede", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    new HeadquarterDAO(headquarter).deleteHeadquarter();
+                    getData();
+                }
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "No puedes borrar una sede "
+                        + "hasta borrar todos sus complejos", "Error borrar Sede",
+                        JOptionPane.OK_OPTION);
             }
+        } catch (DAOException ex) {
+            ex.getMessage();
         }
     }//GEN-LAST:event_BDeleteActionPerformed
 

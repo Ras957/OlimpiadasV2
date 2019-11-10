@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *  Clase HeadquarterDAO que hereda de Headquarter y sirve para 
+ * comunicarse con la base de datos
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
@@ -35,6 +36,7 @@ public class HeadquarterDAO extends Headquarter {
     public HeadquarterDAO(Headquarter headquarter) throws DAOException {
         super(headquarter.getName(), headquarter.getBudget());
         this.id = headquarter.getId();
+        this.numComplexes = headquarter.getNumComplexes();
         con = Conexion.getInstance();
     }
 
@@ -188,6 +190,8 @@ public class HeadquarterDAO extends Headquarter {
         return n;
     }
 }
+
+
 
 
 

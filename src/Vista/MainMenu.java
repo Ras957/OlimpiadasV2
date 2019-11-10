@@ -24,6 +24,15 @@ import javax.swing.JFrame;
  */
 public class MainMenu extends javax.swing.JFrame {
     
+    private ListHeadquarterFrame headquartersFrame = null;
+    private ListSportComplexFrame complexesFrame = null;
+    private ListSportCenterFrame sportCentersFrame = null;
+    private ListMultiSportCenterFrame multiSportCentersFrame = null;
+    private ListEventFrame eventsFrame = null;
+    private ListEquipmentFrame equipmentsFrame = null;
+    private ListCommissionerFrame commissionerFrame = null;
+    private ListAreaFrame areasFrame = null;
+    
     public MainMenu() {
         initComponents();
     }
@@ -157,9 +166,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void HeadquartersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeadquartersActionPerformed
         try{
-            JFrame f = new ListHeadquarterFrame();
-            f.setLocationRelativeTo(this);
-            f.setVisible(true);
+            if (headquartersFrame == null) {
+                headquartersFrame = new ListHeadquarterFrame();
+            }
+            headquartersFrame.setLocationRelativeTo(this);
+            headquartersFrame.setVisible(true);
         }catch(DAOException ex){
             ex.getMessage();
         }
@@ -167,9 +178,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void SportComplexesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SportComplexesActionPerformed
         try{
-            JFrame f = new ListSportComplexFrame();
-            f.setLocationRelativeTo(this);
-            f.setVisible(true);
+            if (complexesFrame == null) {
+                complexesFrame = new ListSportComplexFrame();
+            }
+            complexesFrame.setLocationRelativeTo(this);
+            complexesFrame.setVisible(true);
         }catch(DAOException ex){
             ex.getMessage();
         }
@@ -177,9 +190,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void SportCentersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SportCentersActionPerformed
         try{
-            JFrame f = new ListSportCenterFrame();
-            f.setLocationRelativeTo(this);
-            f.setVisible(true);
+            if (sportCentersFrame == null) {
+                sportCentersFrame = new ListSportCenterFrame();
+            }
+            sportCentersFrame.setLocationRelativeTo(this);
+            sportCentersFrame.setVisible(true);
         }catch(DAOException ex){
             ex.getMessage();
         }
@@ -187,9 +202,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void MultiSportCentersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MultiSportCentersActionPerformed
         try{
-            JFrame f = new ListMultiSportCenterFrame();
-            f.setLocationRelativeTo(this);
-            f.setVisible(true);
+            if (multiSportCentersFrame == null) {
+                multiSportCentersFrame = new ListMultiSportCenterFrame();
+            }
+            multiSportCentersFrame.setLocationRelativeTo(this);
+            multiSportCentersFrame.setVisible(true);
         }catch(DAOException ex){
             ex.getMessage();
         }
@@ -197,9 +214,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void EventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EventsActionPerformed
         try{
-            JFrame f = new ListEventFrame();
-            f.setLocationRelativeTo(this);
-            f.setVisible(true);
+            if (eventsFrame == null) {
+                eventsFrame = new ListEventFrame();
+            }
+            eventsFrame.setLocationRelativeTo(this);
+            eventsFrame.setVisible(true);
         }catch(DAOException ex){
             ex.getMessage();
         }catch (DNIException ex) {
@@ -209,9 +228,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void EquipmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EquipmentsActionPerformed
         try{
-            JFrame f = new ListEquipmentFrame();
-            f.setLocationRelativeTo(this);
-            f.setVisible(true);
+            if (equipmentsFrame == null) {
+                equipmentsFrame = new ListEquipmentFrame();
+            }
+            equipmentsFrame.setLocationRelativeTo(this);
+            equipmentsFrame.setVisible(true);
         }catch(DAOException ex){
             ex.getMessage();
         }
@@ -219,9 +240,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void CommissionersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommissionersActionPerformed
         try{
-            JFrame f = new ListCommissionerFrame();
-            f.setLocationRelativeTo(this);
-            f.setVisible(true);
+            if (commissionerFrame == null) {
+                commissionerFrame = new ListCommissionerFrame();
+            }
+            commissionerFrame.setLocationRelativeTo(this);
+            commissionerFrame.setVisible(true);
         }catch(DAOException ex){
             ex.getMessage();
         }catch (DNIException ex) {
@@ -231,9 +254,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void AreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AreasActionPerformed
         try{
-            JFrame f = new ListAreaFrame();
-            f.setLocationRelativeTo(this);
-            f.setVisible(true);
+            if (areasFrame == null) {
+                areasFrame = new ListAreaFrame();
+            }
+            areasFrame.setLocationRelativeTo(this);
+            areasFrame.setVisible(true);
         }catch(DAOException ex){
             ex.getMessage();
         }
