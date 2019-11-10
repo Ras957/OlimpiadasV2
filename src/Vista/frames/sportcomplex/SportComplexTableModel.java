@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista.frames.sportcomplex;
 
 import Modelo.DAO.SportComplexDAO;
@@ -17,29 +12,41 @@ import javax.swing.table.AbstractTableModel;
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
-public class SportComplexTableModel extends AbstractTableModel{
-    
+public class SportComplexTableModel extends AbstractTableModel {
+
     private SportComplexDAO sportComplexes;
-    
+
     private List<SportComplex> datos = new ArrayList<>();
 
     public SportComplexTableModel(SportComplexDAO sportComplexes) {
         this.sportComplexes = sportComplexes;
     }
-    
+
     public void updateModel() throws DAOException {
         datos = sportComplexes.getAllComplex();
     }
-    
+
     @Override
     public String getColumnName(int column) {
         String n = "";
-        switch (column){
-            case 0: n = "ID"; break;
-            case 1: n = "Localizacion"; break;
-            case 2: n = "Jefe"; break;
-            case 3: n = "Sede"; break;
-            default: n = "[no]";
+        switch (column) {
+            case 0:
+                n = "ID";
+                break;
+            case 1:
+                n = "Localizacion";
+                break;
+            case 2:
+                n = "Jefe";
+                break;
+            case 3:
+                n = "Sede";
+                break;
+            case 4:
+                n = "Tipo";
+                break;
+            default:
+                n = "[no]";
         }
         return n;
     }
@@ -51,27 +58,35 @@ public class SportComplexTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Object o = null;
         SportComplex sc = datos.get(rowIndex);
-        switch (columnIndex){
-            case 0: o = sc.getId(); break;
-            case 1: o = sc.getLocation(); break;
-            case 2: o = sc.getBoss(); break;
-            case 3: o = sc.getHeadquarter().getId(); break;
-            default: o = "";
+        switch (columnIndex) {
+            case 0:
+                o = sc.getId();
+                break;
+            case 1:
+                o = sc.getLocation();
+                break;
+            case 2:
+                o = sc.getBoss();
+                break;
+            case 3:
+                String aux = sc.getHeadquarter().getName() + " (" + sc.getHeadquarter().getId() + ")";
+                o = aux;
+                break;
+            case 4:
+                o = sc.getTipo();
+                break;
+            default:
+                o = "";
         }
         return o;
     }
-    
+
 }
-
-
-
-
-
 

@@ -6,6 +6,7 @@
 package Vista.frames.headquarter;
 
 import Modelo.Headquarter;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -51,14 +52,18 @@ public class HeadquartersDetailsPanel extends javax.swing.JPanel {
         TextName.requestFocus();
     }
     
-    public void saveData(){
+    public boolean saveData(){
+        boolean flag = false;
         if (headquarter == null) {
             headquarter = new Headquarter();
         }
         headquarter.setName(TextName.getText());
-        if (!TextBudget.getText().equals("")) {
+        String regexp = "^\\d{1,10}(\\.\\d{1,2})?$";
+        if (Pattern.matches(regexp, TextBudget.getText())) {
             headquarter.setBudget(Float.parseFloat(TextBudget.getText()));
-        }   
+            flag=true;
+        }
+        return flag;
     }
     
     public boolean checkData(){

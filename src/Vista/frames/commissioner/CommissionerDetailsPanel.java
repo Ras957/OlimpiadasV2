@@ -6,6 +6,7 @@
 package Vista.frames.commissioner;
 
 import Modelo.Commissioner;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -51,12 +52,18 @@ public class CommissionerDetailsPanel extends javax.swing.JPanel {
         TextDNI.requestFocus();
     }
     
-    public void saveData(){
+    public boolean saveData(){
+        boolean flag=false;
         if (commissioner == null) {
             commissioner = new Commissioner();
         }
-        commissioner.setDni(TextDNI.getText());
+        String regexp = "^\\d{8}\\-?\\s?\\w$";
+        if (Pattern.matches(regexp, TextDNI.getText())) {
+            commissioner.setDni(TextDNI.getText());
+            flag=true;
+        }
         commissioner.setName(TextName.getText());
+        return flag;
     }
     
     public boolean checkData(){

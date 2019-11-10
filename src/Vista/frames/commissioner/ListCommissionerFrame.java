@@ -222,19 +222,24 @@ public class ListCommissionerFrame extends javax.swing.JFrame {
     private void BSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSaveActionPerformed
         try {
             if (Details.checkData()) {
-                Details.saveData();
-                Commissioner commissioner = Details.getCommissioner();
-                if (commissioner.getId() == null) {
-                    new CommissionerDAO(commissioner).insertCommissioner();
-                } else {
-                    new CommissionerDAO(commissioner).modifyCommissioner();
+                if (Details.saveData()) {
+                    Commissioner commissioner = Details.getCommissioner();
+                    if (commissioner.getId() == null) {
+                        new CommissionerDAO(commissioner).insertCommissioner();
+                    } else {
+                        new CommissionerDAO(commissioner).modifyCommissioner();
+                    }
+                    Details.setCommissioner(null);
+                    Details.setEdit(false);
+                    Details.loadData();
+                    tabla.clearSelection();
+                    activateButtonsSave(false);
+                    getData();
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Por favor introduzca "
+                        + "un DNI válido", "Error datos incorrectos",
+                        JOptionPane.OK_OPTION);
                 }
-                Details.setCommissioner(null);
-                Details.setEdit(false);
-                Details.loadData();
-                tabla.clearSelection();
-                activateButtonsSave(false);
-                getData();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Por favor rellene "
                         + "todos los campos", "Error datos incompletos",

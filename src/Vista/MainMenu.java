@@ -15,7 +15,6 @@ import Vista.frames.headquarter.ListHeadquarterFrame;
 import Vista.frames.multisportcenter.ListMultiSportCenterFrame;
 import Vista.frames.sportcenter.ListSportCenterFrame;
 import Vista.frames.sportcomplex.ListSportComplexFrame;
-import javax.swing.JFrame;
 
 /**
  *
@@ -169,6 +168,7 @@ public class MainMenu extends javax.swing.JFrame {
             if (headquartersFrame == null) {
                 headquartersFrame = new ListHeadquarterFrame();
             }
+            headquartersFrame.getData();
             headquartersFrame.setLocationRelativeTo(this);
             headquartersFrame.setVisible(true);
         }catch(DAOException ex){
@@ -181,6 +181,7 @@ public class MainMenu extends javax.swing.JFrame {
             if (complexesFrame == null) {
                 complexesFrame = new ListSportComplexFrame();
             }
+            complexesFrame.getData();
             complexesFrame.setLocationRelativeTo(this);
             complexesFrame.setVisible(true);
         }catch(DAOException ex){
@@ -193,6 +194,7 @@ public class MainMenu extends javax.swing.JFrame {
             if (sportCentersFrame == null) {
                 sportCentersFrame = new ListSportCenterFrame();
             }
+            sportCentersFrame.getData();
             sportCentersFrame.setLocationRelativeTo(this);
             sportCentersFrame.setVisible(true);
         }catch(DAOException ex){
@@ -205,6 +207,7 @@ public class MainMenu extends javax.swing.JFrame {
             if (multiSportCentersFrame == null) {
                 multiSportCentersFrame = new ListMultiSportCenterFrame();
             }
+            multiSportCentersFrame.getData();
             multiSportCentersFrame.setLocationRelativeTo(this);
             multiSportCentersFrame.setVisible(true);
         }catch(DAOException ex){
@@ -217,6 +220,7 @@ public class MainMenu extends javax.swing.JFrame {
             if (eventsFrame == null) {
                 eventsFrame = new ListEventFrame();
             }
+            eventsFrame.getData();
             eventsFrame.setLocationRelativeTo(this);
             eventsFrame.setVisible(true);
         }catch(DAOException ex){
@@ -231,6 +235,7 @@ public class MainMenu extends javax.swing.JFrame {
             if (equipmentsFrame == null) {
                 equipmentsFrame = new ListEquipmentFrame();
             }
+            equipmentsFrame.getData();
             equipmentsFrame.setLocationRelativeTo(this);
             equipmentsFrame.setVisible(true);
         }catch(DAOException ex){
@@ -243,6 +248,7 @@ public class MainMenu extends javax.swing.JFrame {
             if (commissionerFrame == null) {
                 commissionerFrame = new ListCommissionerFrame();
             }
+            commissionerFrame.getData();
             commissionerFrame.setLocationRelativeTo(this);
             commissionerFrame.setVisible(true);
         }catch(DAOException ex){
@@ -257,6 +263,7 @@ public class MainMenu extends javax.swing.JFrame {
             if (areasFrame == null) {
                 areasFrame = new ListAreaFrame();
             }
+            areasFrame.getData();
             areasFrame.setLocationRelativeTo(this);
             areasFrame.setVisible(true);
         }catch(DAOException ex){

@@ -10,6 +10,7 @@ public class SportComplex {
     protected String location;
     protected String boss;
     protected Headquarter headquarter;
+    protected String tipo;
 
     /*
     public SportComplex(String location, String boss) {
@@ -85,6 +86,14 @@ public class SportComplex {
     public void setHeadquarter(Headquarter headquarter) {
         this.headquarter = headquarter;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
     
     /*
     @Override
@@ -99,6 +108,7 @@ public class SportComplex {
     }
     
 }
+
 
 
 

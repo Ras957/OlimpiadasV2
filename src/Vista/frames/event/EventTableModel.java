@@ -10,7 +10,6 @@ import Modelo.DAO.EventDAO;
 import Modelo.Event;
 import Modelo.auxiliary.DAOException;
 import Modelo.auxiliary.DNIException;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -98,7 +97,7 @@ public class EventTableModel extends AbstractTableModel {
             case 4:
                 String area="";
                 if (e.getArea()!= null) {
-                   area = e.getArea().getLocation()+"()"; 
+                   area = e.getArea().getLocation()+"("+e.getArea().getId()+")"; 
                 }
                 o = area;
                 break;

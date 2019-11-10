@@ -205,19 +205,24 @@ public class ListHeadquarterFrame extends javax.swing.JFrame {
     private void BSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSaveActionPerformed
         try {
             if (Details.checkData()) {
-                Details.saveData();
-                Headquarter headquarter = Details.getHeadquarter();
-                if (headquarter.getId() == null) {
-                    new HeadquarterDAO(headquarter).insertHeadquarter();
-                } else {
-                    new HeadquarterDAO(headquarter).modifyHeadquarter();
+                if (Details.saveData()) {
+                    Headquarter headquarter = Details.getHeadquarter();
+                    if (headquarter.getId() == null) {
+                        new HeadquarterDAO(headquarter).insertHeadquarter();
+                    } else {
+                        new HeadquarterDAO(headquarter).modifyHeadquarter();
+                    }
+                    Details.setHeadquarter(null);
+                    Details.setEdit(false);
+                    Details.loadData();
+                    tabla.clearSelection();
+                    activateButtonsSave(false);
+                    getData();
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Por favor introduzca "
+                        + "un número", "Error datos incorrectos",
+                        JOptionPane.OK_OPTION);
                 }
-                Details.setHeadquarter(null);
-                Details.setEdit(false);
-                Details.loadData();
-                tabla.clearSelection();
-                activateButtonsSave(false);
-                getData();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Por favor rellene "
                         + "todos los campos", "Error datos incompletos",
@@ -238,7 +243,7 @@ public class ListHeadquarterFrame extends javax.swing.JFrame {
                     new HeadquarterDAO(headquarter).deleteHeadquarter();
                     getData();
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "No puedes borrar una sede "
                         + "hasta borrar todos sus complejos", "Error borrar Sede",
                         JOptionPane.OK_OPTION);

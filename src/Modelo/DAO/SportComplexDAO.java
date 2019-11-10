@@ -18,8 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  Clase SportComplexDAO que hereda de SportComplex y sirve para 
- * comunicarse con la base de datos
+ * Clase SportComplexDAO que hereda de SportComplex y sirve para comunicarse con
+ * la base de datos
+ *
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
@@ -30,6 +31,8 @@ public class SportComplexDAO extends SportComplex {
     public static final String DELETE = "DELETE FROM SportComplex WHERE id=?";
     public static final String GETALL = "SELECT * FROM SportComplex";
     public static final String GETONE = "SELECT * FROM SportComplex WHERE id=?";
+    public static final String SC_TIP = "SELECT id FROM sportcomplex sx, sportcenter sc WHERE sx.id=sc.id_sportcomplex AND id=?";
+    public static final String MSC_TIP = "SELECT id FROM sportcomplex sx, multisportcenter msc WHERE sx.id=msc.id_sportcomplex AND id=?";
 
     public static Conexion con;
 
@@ -47,7 +50,7 @@ public class SportComplexDAO extends SportComplex {
     public SportComplexDAO() throws DAOException {
         con = Conexion.getInstance();
     }
-    
+
     public boolean insertComplex() throws DAOException {
         boolean yes = false;
         PreparedStatement stat = null;
@@ -86,7 +89,7 @@ public class SportComplexDAO extends SportComplex {
             stat.setInt(4, this.getId());
             if (stat.executeUpdate() == 0) {
                 throw new DAOException("Puede que no se haya guardado");
-            }else{
+            } else {
                 yes = true;
             }
         } catch (SQLException ex) {
@@ -105,7 +108,7 @@ public class SportComplexDAO extends SportComplex {
             stat.setInt(1, this.getId());
             if (stat.executeUpdate() == 0) {
                 throw new DAOException("Puede que no se haya guardado");
-            }else{
+            } else {
                 yes = true;
             }
         } catch (SQLException ex) {
@@ -116,7 +119,7 @@ public class SportComplexDAO extends SportComplex {
         return yes;
     }
 
-    private SportComplex convert(ResultSet rs) throws DAOException{
+    private SportComplex convert(ResultSet rs) throws DAOException {
         SportComplex sportComplex = null;
         try {
             String location = rs.getString("location");
@@ -125,6 +128,7 @@ public class SportComplexDAO extends SportComplex {
             Headquarter hq = new HeadquarterDAO().getHeadquarter(idHq);
             sportComplex = new SportComplex(location, boss, hq);
             sportComplex.setId(rs.getInt("id"));
+            sportComplex.setTipo(getTip(rs.getInt("id")));
         } catch (SQLException ex) {
             throw new DAOException("Error en SQL", ex);
         }
@@ -170,22 +174,36 @@ public class SportComplexDAO extends SportComplex {
         return sportComplex;
     }
 
-    static class getComplex extends SportComplex {
-
-        public getComplex(int aInt) {
+    public String getTip(Integer id) throws DAOException {
+        PreparedStatement stat = null;
+        ResultSet rs = null;
+        String tipo = "Sin definir";
+        boolean encontrado = false;
+        try {
+            stat = con.getMiConexion().prepareStatement(SC_TIP);
+            stat.setInt(1, id);
+            rs = stat.executeQuery();
+            if (rs.next()) {
+                tipo = "Unideportivo";
+                encontrado = true;
+            }
+            if (!encontrado) {
+                stat = con.getMiConexion().prepareStatement(MSC_TIP);
+                stat.setInt(1, id);
+                rs = stat.executeQuery();
+                if (rs.next()) {
+                    tipo = "Polideportivo";
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DAOException("Error en SQL", ex);
+        } finally {
+            Closer.close(stat, rs);
         }
+        return tipo;
     }
 
 }
-
-
-
-
-
-
-
-
-
 
 
 

@@ -2,11 +2,12 @@ package Modelo.auxiliary;
 
 import Controlador.CargarXML;
 import Controlador.Configuracion;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
 
 /**
@@ -55,6 +56,7 @@ public class Conexion extends Controlador.Configuracion{
      */
     public boolean conectar() throws DAOException {
         try {
+            //crearBBDD();
             Class.forName("com.mysql.jdbc.Driver");
             miConexion = DriverManager.getConnection("jdbc:mysql://"+
                     this.host+"/"+this.name+"?autoReconnect=true&amp;useSSL=false", this.login, this.password);
@@ -74,6 +76,25 @@ public class Conexion extends Controlador.Configuracion{
            throw new DAOException("Error en la conexion", ex);
 	}
 	return seCerro;	
+    }
+    
+    public static void crearBBDD(){
+        System.out.println("Creando nueva Base de datos...");
+        ejecutar("olympics.bat");
+    }
+    
+    public static void ejecutar(String archivo){
+        try {
+            String comando;
+            Process proceso = Runtime.getRuntime().exec(archivo);
+            BufferedReader lector = new BufferedReader (new InputStreamReader (proceso.getInputStream()));
+            while ((comando = lector.readLine()) != null) {
+                System.out.println(comando);
+            }
+                lector.close();
+            }catch (Exception err) {
+                err.printStackTrace();
+            }
     }
 
     /**
@@ -104,6 +125,14 @@ public class Conexion extends Controlador.Configuracion{
         this.miConexion = miConexion;
     }
 }
+
+
+
+
+
+
+
+
 
 
 
