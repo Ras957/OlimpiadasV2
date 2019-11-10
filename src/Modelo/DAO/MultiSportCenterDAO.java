@@ -6,7 +6,6 @@
 package Modelo.DAO;
 
 import Modelo.MultiSportCenter;
-import Modelo.SportCenter;
 import Modelo.SportComplex;
 import Modelo.auxiliary.Closer;
 import Modelo.auxiliary.Conexion;
@@ -16,8 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -164,6 +161,7 @@ public class MultiSportCenterDAO extends MultiSportCenter{
         return multiSportCenter;
     }
 }
+
 
 
 

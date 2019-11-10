@@ -6,7 +6,6 @@
 package Vista.frames.sportcenter;
 
 import Modelo.SportComplex;
-import java.util.Objects;
 
 /**
  *
@@ -18,6 +17,7 @@ public class SportComplexComboView extends SportComplex {
     public SportComplexComboView(SportComplex sportComplex) {
         super(sportComplex.getLocation(), sportComplex.getBoss(), 
                 sportComplex.getHeadquarter());
+        this.id = sportComplex.getId();
     }
 
     @Override
@@ -28,6 +28,7 @@ public class SportComplexComboView extends SportComplex {
     
     
 }
+
 
 
 

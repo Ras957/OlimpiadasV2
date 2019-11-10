@@ -33,6 +33,7 @@ public class EquipmentDAO extends Equipment{
 
     public EquipmentDAO(Equipment equip) throws DAOException {
         super(equip.getName());
+        this.id = equip.getId();
         con = Conexion.getInstance();
     }
 
@@ -161,6 +162,7 @@ public class EquipmentDAO extends Equipment{
         return equip;
     }
 }
+
 
 
 

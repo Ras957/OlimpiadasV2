@@ -5,8 +5,8 @@
  */
 package Modelo;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -36,7 +36,8 @@ public class Event {
         this.commissioners = new HashMap<>();
     }
 
-    public Event(String name, SportComplex complex, Date date, Area area, List<Equipment> equip, HashMap<Commissioner, String> commissioners) {
+    public Event(String name, SportComplex complex, Date date, Area area, 
+            List<Equipment> equip, HashMap<Commissioner, String> commissioners) {
         this.name = name;
         this.complex = complex;
         this.date = date;
@@ -175,6 +176,8 @@ public class Event {
         return aux;
     }
 }
+
+
 
 
 

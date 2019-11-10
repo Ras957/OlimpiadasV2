@@ -29,15 +29,23 @@ public class AreaComboModel extends DefaultComboBoxModel<AreaComboView>{
         this.areas = areas;
         this.list = new ArrayList<>();
     }
-    public void update() throws DAOException{
-        if (areas != null) {
-            list = areas.getAllArea();
-            removeAllElements();
-            for (Area a : list) {
-                addElement( new AreaComboView(a));
-            }
-        }
-        
+    
+//    public void update() {
+//        if (areas != null) {
+//            list = areas.getAllArea();
+//            removeAllElements();
+//            for (Area a : list) {
+//                addElement( new AreaComboView(a));
+//            }
+//        }
+//    }
+
+    public List<Area> getList() {
+        return list;
+    }
+
+    public void setList(List<Area> list) {
+        this.list = list;
     }
     
     public void update(int n) throws DAOException{

@@ -5,6 +5,7 @@
  */
 package Vista.frames.event;
 
+import Modelo.Area;
 import Modelo.DAO.AreaDAO;
 import Modelo.DAO.CommissionerDAO;
 import Modelo.DAO.EquipmentDAO;
@@ -15,7 +16,9 @@ import Modelo.auxiliary.DAOException;
 import Modelo.auxiliary.DNIException;
 import Vista.frames.sportcenter.SportComplexComboModel;
 import Vista.frames.sportcenter.SportComplexComboView;
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
+
 
 /**
  *
@@ -25,14 +28,14 @@ import java.util.Date;
 public class EventDetailsPanel extends javax.swing.JPanel {
 
     private Event event;
-    
+
     private boolean edit;
-    
+
     private SportComplexComboModel comboComplex;
     private CommissionerComboModel comboCommissioner;
     private EquipmentComboModel comboEquip;
     private AreaComboModel comboArea;
-    
+
     public EventDetailsPanel() {
         initComponents();
         comboComplex = new SportComplexComboModel(null);
@@ -40,9 +43,9 @@ public class EventDetailsPanel extends javax.swing.JPanel {
         comboEquip = new EquipmentComboModel(null);
         comboArea = new AreaComboModel(null);
     }
-    
+
     public EventDetailsPanel(SportComplexDAO complex, CommissionerDAO comm,
-           EquipmentDAO equip, AreaDAO area ) throws DAOException, DNIException {
+            EquipmentDAO equip, AreaDAO area) throws DAOException, DNIException {
         initComponents();
         comboComplex = new SportComplexComboModel(complex);
         comboComplex.update();
@@ -53,9 +56,9 @@ public class EventDetailsPanel extends javax.swing.JPanel {
         comboEquip = new EquipmentComboModel(equip);
         comboEquip.update();
         ComboBoxEquipment.setModel(comboEquip);
-        comboArea = new AreaComboModel(area);
-        comboArea.update();
-        ComboBoxArea.setModel(comboArea);
+//        comboArea = new AreaComboModel(area);
+//        comboArea.update();
+//        ComboBoxArea.setModel(comboArea);
     }
 
     public Event getEvent() {
@@ -75,7 +78,7 @@ public class EventDetailsPanel extends javax.swing.JPanel {
         TextName.setEditable(edit);
         ComboBoxSportComplex.setEnabled(edit);
         FormattedTextDate.setEditable(edit);
-        ComboBoxArea.setEnabled(edit);
+        ComboBoxArea.setEnabled(edit); 
         ComboBoxEquipment.setEnabled(edit);
         ComboBoxCommissioner.setEnabled(edit);
         ComboBoxRol.setEnabled(edit);
@@ -85,7 +88,7 @@ public class EventDetailsPanel extends javax.swing.JPanel {
         return comboComplex;
     }
 
-    public void setComboComplex(SportComplexComboModel comboComplex) 
+    public void setComboComplex(SportComplexComboModel comboComplex)
             throws DAOException {
         this.comboComplex = comboComplex;
         ComboBoxSportComplex.setModel(comboComplex);
@@ -96,7 +99,7 @@ public class EventDetailsPanel extends javax.swing.JPanel {
         return comboCommissioner;
     }
 
-    public void setComboCommissioner(CommissionerComboModel comboCommissioner) 
+    public void setComboCommissioner(CommissionerComboModel comboCommissioner)
             throws DAOException, DNIException {
         this.comboCommissioner = comboCommissioner;
         ComboBoxCommissioner.setModel(comboCommissioner);
@@ -107,7 +110,7 @@ public class EventDetailsPanel extends javax.swing.JPanel {
         return comboEquip;
     }
 
-    public void setComboEquip(EquipmentComboModel comboEquip) 
+    public void setComboEquip(EquipmentComboModel comboEquip)
             throws DAOException {
         this.comboEquip = comboEquip;
         ComboBoxEquipment.setModel(comboEquip);
@@ -121,70 +124,85 @@ public class EventDetailsPanel extends javax.swing.JPanel {
     public void setComboArea(AreaComboModel comboArea) throws DAOException {
         this.comboArea = comboArea;
         ComboBoxArea.setModel(comboArea);
-        comboArea.update();
+        //comboArea.update();
     }
-    
-    public void loadData(){
+
+    public void loadData() {
         if (event != null) {
             TextName.setText(event.getName());
+            try {
+                FormattedTextDate.commitEdit();
+            } catch (ParseException ex) {
+                ex.getMessage();
+            }
             FormattedTextDate.setValue(event.getDate());
             SelectItemComboBox();
-        }else{
+        } else {
             TextName.setText("");
-            FormattedTextDate.setText("");
+            FormattedTextDate.setValue("");
+            try {
+                comboArea.update(ComboBoxSportComplex.getItemAt(0).getId());
+                ComboBoxArea.setModel(comboArea);
+            } catch (DAOException ex) {
+                ex.getMessage();
+            }
         }
         TextName.requestFocus();
     }
-    
+
     public void SelectItemComboBox() {
-        boolean encontrado=false;
-        for (int i = 0; i < ComboBoxSportComplex.getItemCount() && !encontrado; i++) {
-            if (ComboBoxSportComplex.getItemAt(i).getId() == 
-                    event.getComplex().getId()) {
+        boolean encontrado1 = false;
+        boolean encontrado2 = false;
+        for (int i = 0; i < ComboBoxSportComplex.getItemCount() && !encontrado1; i++) {
+            if (ComboBoxSportComplex.getItemAt(i).getId()
+                    == event.getComplex().getId()) {
                 ComboBoxSportComplex.setSelectedIndex(i);
-                encontrado=true;
-                
-                
+                encontrado1 = true;
             }
         }
+        if (ComboBoxArea.isEnabled()) {
+            for (int i = 0; i < ComboBoxArea.getItemCount() && !encontrado2; i++) {
+            if (ComboBoxArea.getItemAt(i).getId()
+                    == event.getArea().getId()) {
+                ComboBoxArea.setSelectedIndex(i);
+                encontrado2 = true;
+            }
+        }
+        }
     }
-    
-    
-    
-    public void saveData(){
+
+    public void saveData() {
         if (event == null) {
             event = new Event();
         }
         event.setName(TextName.getText());
-        SportComplexComboView sccv =
-                (SportComplexComboView) ComboBoxSportComplex.getSelectedItem();
-        event.setComplex((SportComplex)sccv);
-        event.setDate((Date)FormattedTextDate.getValue());
+        SportComplexComboView sccv
+                = (SportComplexComboView) ComboBoxSportComplex.getSelectedItem();
+        event.setComplex((SportComplex) sccv);
+        event.setDate((Date) FormattedTextDate.getValue());
         AreaComboView acv = (AreaComboView) ComboBoxArea.getSelectedItem();
-        event.setArea(acv.getArea());
-        EquipmentComboView ecv = 
-                (EquipmentComboView) ComboBoxEquipment.getSelectedItem();
-        event.getEquip().add(ecv.getEquipment());
-        CommissionerComboView ccv = 
-                (CommissionerComboView) ComboBoxCommissioner.getSelectedItem();
+        event.setArea((Area)acv);
+        EquipmentComboView ecv
+                = (EquipmentComboView) ComboBoxEquipment.getSelectedItem();
+        event.getEquip().add(ecv);
+        CommissionerComboView ccv
+                = (CommissionerComboView) ComboBoxCommissioner.getSelectedItem();
         String rol = (String) ComboBoxRol.getSelectedItem();
-        event.getCommissioners().put(ccv.getCommissioner(), rol);
+        event.getCommissioners().put(ccv, rol);
     }
-    
-    public boolean checkData(){
+
+    public boolean checkData() {
         boolean noEmpty = false;
         if (!TextName.getText().equals("") && !FormattedTextDate.getText().equals("")) {
             noEmpty = true;
         }
         return noEmpty;
     }
-    
-    
 
     /**
-     * This method is called from within the constructor to initialize
-     * the form. WARNING: Do NOT modify this code. The content of this
-     * method is always regenerated by the Form Editor.
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -197,12 +215,12 @@ public class EventDetailsPanel extends javax.swing.JPanel {
         Equipments = new javax.swing.JLabel();
         Commissioners = new javax.swing.JLabel();
         TextName = new javax.swing.JTextField();
-        ComboBoxSportComplex = new javax.swing.JComboBox<>();
         FormattedTextDate = new javax.swing.JFormattedTextField();
         ComboBoxArea = new javax.swing.JComboBox<>();
         ComboBoxEquipment = new javax.swing.JComboBox<>();
         ComboBoxCommissioner = new javax.swing.JComboBox<>();
         ComboBoxRol = new javax.swing.JComboBox<>();
+        ComboBoxSportComplex = new javax.swing.JComboBox<>();
 
         Name.setText("Nombre:");
 
@@ -216,16 +234,16 @@ public class EventDetailsPanel extends javax.swing.JPanel {
 
         Commissioners.setText("Comisarios:");
 
+        FormattedTextDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+
+        ComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OBSERVADOR", "JUEZ" }));
+
         ComboBoxSportComplex.setModel(new javax.swing.DefaultComboBoxModel<>(new SportComplexComboView[] { }));
         ComboBoxSportComplex.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboBoxSportComplexItemStateChanged(evt);
             }
         });
-
-        FormattedTextDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-
-        ComboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OBSERVADOR", "JUEZ" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -240,17 +258,17 @@ public class EventDetailsPanel extends javax.swing.JPanel {
                     .addComponent(Equipments)
                     .addComponent(Name)
                     .addComponent(Commissioners))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ComboBoxCommissioner, 0, 152, Short.MAX_VALUE)
+                        .addComponent(ComboBoxCommissioner, 0, 166, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(ComboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(TextName)
                     .addComponent(ComboBoxEquipment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(FormattedTextDate)
-                    .addComponent(ComboBoxSportComplex, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ComboBoxArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ComboBoxArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ComboBoxSportComplex, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -287,8 +305,13 @@ public class EventDetailsPanel extends javax.swing.JPanel {
 
     private void ComboBoxSportComplexItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBoxSportComplexItemStateChanged
         try {
-            comboArea.update(((SportComplexComboView)evt.getItem()).getId());
-            ComboBoxArea.setModel(comboArea);
+            comboArea.update(((SportComplexComboView) evt.getItem()).getId());
+            if (comboArea.getList().isEmpty()) {
+                ComboBoxArea.setEnabled(false);
+            } else {
+                ComboBoxArea.setModel(comboArea);
+                ComboBoxArea.setEnabled(true);
+            }
         } catch (DAOException ex) {
             ex.printStackTrace();
         }
@@ -311,4 +334,3 @@ public class EventDetailsPanel extends javax.swing.JPanel {
     private javax.swing.JTextField TextName;
     // End of variables declaration//GEN-END:variables
 }
-

@@ -14,7 +14,6 @@ import Modelo.Headquarter;
  */
 public class HeadquarterComboView  extends Headquarter{
     
-
     public HeadquarterComboView(Headquarter headquarter) {
         super(headquarter.getName(), headquarter.getBudget());
         this.id = headquarter.getId();
@@ -28,6 +27,7 @@ public class HeadquarterComboView  extends Headquarter{
     
     
 }
+
 
 
 

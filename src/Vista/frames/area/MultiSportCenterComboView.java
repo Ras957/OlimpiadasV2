@@ -6,6 +6,7 @@
 package Vista.frames.area;
 
 import Modelo.MultiSportCenter;
+import Modelo.SportComplex;
 import java.util.Objects;
 
 /**
@@ -13,55 +14,23 @@ import java.util.Objects;
  * @author Francisco Miguel Carrasquilla Rodríguez-Córdoba
  * <afcarrasquilla@iesfranciscodelosrios.es>
  */
-class MultiSportCenterComboView {
-    
-    private MultiSportCenter msc;
+class MultiSportCenterComboView extends MultiSportCenter{
     
     public MultiSportCenterComboView(MultiSportCenter msc){
-        this.msc = msc;
-    }
-
-    public MultiSportCenter getMsc() {
-        return msc;
-    }
-
-    public void setMsc(MultiSportCenter msc) {
-        this.msc = msc;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.msc);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final MultiSportCenterComboView other = (MultiSportCenterComboView) obj;
-        if (!Objects.equals(this.msc, other.msc)) {
-            return false;
-        }
-        return true;
+        super(new SportComplex(msc.getLocation(), msc.getBoss(), 
+                msc.getHeadquarter()), msc.getInformation());
+        this.id = msc.getId();
     }
 
     @Override
     public String toString() {
-        return msc.getLocation()+" (ID:"+msc.getId()+")";
+        return this.getLocation()+" (ID:"+this.getId()+")";
     }
     
     
     
 }
+
 
 
 

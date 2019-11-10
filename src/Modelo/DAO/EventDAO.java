@@ -9,13 +9,13 @@ import Modelo.auxiliary.Closer;
 import Modelo.auxiliary.Conexion;
 import Modelo.auxiliary.DAOException;
 import Modelo.auxiliary.DNIException;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -50,6 +50,7 @@ public class EventDAO extends Event{
     public EventDAO(Event e) throws DAOException{
         super(e.getName(), e.getComplex(), e.getDate(), e.getArea(), 
                 e.getEquip(), e.getCommissioners());
+        this.id = e.getId();
         con = Conexion.getInstance();
     }
 
@@ -78,7 +79,7 @@ public class EventDAO extends Event{
         try {
             stat = con.getMiConexion().prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
             stat.setString(1, this.getName());
-            stat.setDate(2, (java.sql.Date) this.getDate());
+            stat.setDate(2, this.getDate());
             stat.setInt(3, this.getComplex().getId());
             if (this.getArea() != null) {
                 stat.setInt(4, this.getArea().getId());
@@ -300,6 +301,9 @@ public class EventDAO extends Event{
     }
     
 }
+
+
+
 
 
 

@@ -34,6 +34,7 @@ public class SportComplexDAO extends SportComplex {
 
     public SportComplexDAO(SportComplex sc) throws DAOException {
         super(sc.getLocation(), sc.getBoss(), sc.getHeadquarter());
+        this.id = sc.getId();
         con = Conexion.getInstance();
     }
 
@@ -175,6 +176,7 @@ public class SportComplexDAO extends SportComplex {
     }
 
 }
+
 
 
 

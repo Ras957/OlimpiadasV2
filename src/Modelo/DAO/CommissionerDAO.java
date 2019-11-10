@@ -34,6 +34,7 @@ public class CommissionerDAO extends Commissioner{
 
     public CommissionerDAO(Commissioner com) throws DAOException {
         super(com.getDni(), com.getName());
+        this.id = com.getId();
         con = Conexion.getInstance();
     }
     
@@ -179,6 +180,7 @@ public class CommissionerDAO extends Commissioner{
     }
     
 }
+
 
 
 

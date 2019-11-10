@@ -35,6 +35,7 @@ public class AreaDAO extends Area{
     
     public AreaDAO(Area a) throws DAOException{
         super(a.getLocation(), a.getSport(), a.getMsc());
+        this.id = a.getId();
         con = Conexion.getInstance();
     }
 
@@ -194,6 +195,7 @@ public class AreaDAO extends Area{
         return areas;
     }
 }
+
 
 
 

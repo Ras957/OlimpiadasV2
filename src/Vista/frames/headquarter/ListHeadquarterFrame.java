@@ -203,20 +203,14 @@ public class ListHeadquarterFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BCancelActionPerformed
 
     private void BSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSaveActionPerformed
-        boolean insertado = false;
-        boolean modificado = false;
         try {
             if (Details.checkData()) {
                 Details.saveData();
                 Headquarter headquarter = Details.getHeadquarter();
                 if (headquarter.getId() == null) {
-                    if (new HeadquarterDAO(headquarter).insertHeadquarter()) {
-                        insertado = true;
-                    }
+                    new HeadquarterDAO(headquarter).insertHeadquarter();
                 } else {
-                    if (new HeadquarterDAO(headquarter).modifyHeadquarter()) {
-                        modificado = true;
-                    }
+                    new HeadquarterDAO(headquarter).modifyHeadquarter();
                 }
                 Details.setHeadquarter(null);
                 Details.setEdit(false);
@@ -224,15 +218,6 @@ public class ListHeadquarterFrame extends javax.swing.JFrame {
                 tabla.clearSelection();
                 activateButtonsSave(false);
                 getData();
-                if (insertado) {
-                    JOptionPane.showMessageDialog(rootPane, "Sede insertada "
-                            + "con exito", "Insertar Sede",
-                            JOptionPane.OK_OPTION);
-                }else if (modificado) {
-                    JOptionPane.showMessageDialog(rootPane, "Sede modificada "
-                            + "con exito", "Modificar Sede",
-                            JOptionPane.OK_OPTION);
-                }
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Por favor rellene "
                         + "todos los campos", "Error datos incompletos",

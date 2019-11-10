@@ -239,20 +239,15 @@ public class ListSportCenterFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BDeleteActionPerformed
 
     private void BSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSaveActionPerformed
-        boolean insertado = false;
-        boolean modificado = false;
         try {
             if (Details.checkData()) {
                 Details.saveData();
                 SportCenter sportCenter = Details.getSportCenter();
                 if (isNew) {
-                    if (new SportCenterDAO(sportCenter).insertSportCenter()) {
-                        insertado = true;
-                    }
+                    new SportCenterDAO(sportCenter).insertSportCenter();
+
                 } else {
-                    if (new SportCenterDAO(sportCenter).modifySportCenter(sportCenter.getId())) {
-                        modificado = true;
-                    }
+                    new SportCenterDAO(sportCenter).modifySportCenter(sportCenter.getId());
                 }
                 Details.setSportCenter(null);
                 Details.setEdit(false);
@@ -260,15 +255,6 @@ public class ListSportCenterFrame extends javax.swing.JFrame {
                 tabla.clearSelection();
                 activateButtonsSave(false);
                 getData();
-                if (insertado) {
-                    JOptionPane.showMessageDialog(rootPane, "Unideportivo insertado "
-                            + "con exito", "Insertar Unideportivo",
-                            JOptionPane.OK_OPTION);
-                }else if (modificado) {
-                    JOptionPane.showMessageDialog(rootPane, "Unideportivo modificada "
-                            + "con exito", "Modificar Unideportivo",
-                            JOptionPane.OK_OPTION);
-                }
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Por favor rellene "
                         + "todos los campos", "Error datos incompletos",

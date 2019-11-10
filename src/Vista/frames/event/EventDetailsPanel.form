@@ -26,18 +26,18 @@
                   <Component id="Name" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="Commissioners" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="ComboBoxCommissioner" pref="152" max="32767" attributes="0"/>
+                      <Component id="ComboBoxCommissioner" pref="166" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="ComboBoxRol" min="-2" pref="137" max="-2" attributes="0"/>
                   </Group>
                   <Component id="TextName" max="32767" attributes="0"/>
                   <Component id="ComboBoxEquipment" max="32767" attributes="0"/>
                   <Component id="FormattedTextDate" max="32767" attributes="0"/>
-                  <Component id="ComboBoxSportComplex" max="32767" attributes="0"/>
                   <Component id="ComboBoxArea" max="32767" attributes="0"/>
+                  <Component id="ComboBoxSportComplex" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -115,23 +115,10 @@
     </Component>
     <Component class="javax.swing.JTextField" name="TextName">
     </Component>
-    <Component class="javax.swing.JComboBox" name="ComboBoxSportComplex">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new SportComplexComboView[] { })" type="code"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="ComboBoxSportComplexItemStateChanged"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;SportComplexComboView&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JFormattedTextField" name="FormattedTextDate">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format subtype="0" type="1"/>
+          <Format format="dd/MM/yyyy" subtype="-1" type="1"/>
         </Property>
       </Properties>
     </Component>
@@ -176,6 +163,19 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="ComboBoxSportComplex">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new SportComplexComboView[] { })" type="code"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="ComboBoxSportComplexItemStateChanged"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;SportComplexComboView&gt;"/>
       </AuxValues>
     </Component>
   </SubComponents>

@@ -91,8 +91,9 @@ public class EventTableModel extends AbstractTableModel {
                 o = e.getComplex();
                 break;
             case 3:
-                DateFormat df = DateFormat.getDateInstance();
-                o = df.format(e.getDate());
+//                DateFormat df = DateFormat.getDateInstance();
+//                o = df.format(e.getDate());
+                o = e.getDate();
                 break;
             case 4:
                 o = e.getArea();

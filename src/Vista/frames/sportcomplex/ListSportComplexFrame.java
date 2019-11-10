@@ -170,14 +170,15 @@ public class ListSportComplexFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 951, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Detalles, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(Detalles, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Registros)
@@ -239,20 +240,15 @@ public class ListSportComplexFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BDeleteActionPerformed
 
     private void BSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSaveActionPerformed
-        boolean insertado = false;
-        boolean modificado = false;
-        try {
+try {
             if (Details.checkData()) {
                 Details.saveData();
                 SportComplex sportComplex = Details.getSportComplex();
                 if (sportComplex.getId() == null) {
-                    if (new SportComplexDAO(sportComplex).insertComplex()) {
-                        insertado = true;
-                    }
+                    new SportComplexDAO(sportComplex).insertComplex();
+
                 } else {
-                    if (new SportComplexDAO(sportComplex).modifyComplex()) {
-                        modificado = true;
-                    }
+                    new SportComplexDAO(sportComplex).modifyComplex();
                 }
                 Details.setSportComplex(null);
                 Details.setEdit(false);
@@ -260,15 +256,6 @@ public class ListSportComplexFrame extends javax.swing.JFrame {
                 tabla.clearSelection();
                 activateButtonsSave(false);
                 getData();
-                if (insertado) {
-                    JOptionPane.showMessageDialog(rootPane, "Complejo insertado "
-                            + "con exito", "Insertar Complejo",
-                            JOptionPane.OK_OPTION);
-                }else if (modificado) {
-                    JOptionPane.showMessageDialog(rootPane, "Complejo modificado "
-                            + "con exito", "Modificar Complejo",
-                            JOptionPane.OK_OPTION);
-                }
             }else{
                 JOptionPane.showMessageDialog(rootPane, "Por favor rellene "
                     + "todos los campos", "Error datos incompletos",

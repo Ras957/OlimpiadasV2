@@ -79,7 +79,7 @@ public class AreaDetailsPanel extends javax.swing.JPanel {
     public void SelectItemComboBox() {
         boolean encontrado=false;
         for (int i = 0; i < ComboMultiSportCenter.getItemCount() && !encontrado; i++) {
-            if (ComboMultiSportCenter.getItemAt(i).getMsc().getId() == 
+            if (ComboMultiSportCenter.getItemAt(i).getId() == 
                     area.getMsc().getId()) {
                 ComboMultiSportCenter.setSelectedIndex(i);
                 encontrado=true;
@@ -95,7 +95,7 @@ public class AreaDetailsPanel extends javax.swing.JPanel {
         area.setSport(TextSport.getText());
         MultiSportCenterComboView msccv = 
                 (MultiSportCenterComboView) ComboMultiSportCenter.getSelectedItem();
-        MultiSportCenter msc = msccv.getMsc();
+        MultiSportCenter msc = (MultiSportCenter) msccv;
         area.setMsc(msc);
     }
     

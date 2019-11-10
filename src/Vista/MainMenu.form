@@ -4,6 +4,13 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Base de datos Olimpiadas"/>
+    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[880, 280]"/>
+    </Property>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[880, 280]"/>
+    </Property>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -26,27 +33,28 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="Headquarters" min="-2" pref="104" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="SportComplexes" min="-2" pref="104" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="SportCenters" min="-2" pref="104" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="MultiSportCenters" min="-2" pref="104" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="Headquarters" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="SportComplexes" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="SportCenters" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="MultiSportCenters" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="Events" min="-2" pref="104" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="Equipments" min="-2" pref="104" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                      <Component id="Commissioners" min="-2" pref="104" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="Areas" min="-2" pref="104" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="Events" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="Equipments" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="Commissioners" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="Areas" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -55,19 +63,19 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Headquarters" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                  <Component id="SportComplexes" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                  <Component id="SportCenters" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                  <Component id="MultiSportCenters" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
+                  <Component id="Headquarters" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="SportComplexes" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="SportCenters" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="MultiSportCenters" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="Events" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                  <Component id="Equipments" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                  <Component id="Commissioners" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
-                  <Component id="Areas" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
+                  <Component id="Events" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="Equipments" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="Areas" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Component id="Commissioners" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -131,7 +139,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="Commissioners">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Comsarios"/>
+        <Property name="text" type="java.lang.String" value="Comisarios"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CommissionersActionPerformed"/>
